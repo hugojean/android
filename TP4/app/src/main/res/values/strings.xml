@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TP4</string>
+    <string name="voir_annonce">Voir annonce</string>
+    <string name="deposer_annonce">Deposer annonce</string>
+    <string name="liste_annonces">Liste annonces</string>
+    <string name="mon_profil">Mon profil</string>
+    <string name="textview">TextView</string>
+    <string name="todo">TODO</string>
+</resources>
