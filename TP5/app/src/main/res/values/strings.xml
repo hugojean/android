@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">TP5</string>
+    <string name="prix">Prix</string>
+    <string name="titre">Titre</string>
+    <string name="codepost">Code Postal</string>
+    <string name="ville">Ville</string>
+    <string name="descri">Description</string>
+    <string name="date">Date</string>
+    <string name="pseudo">Pseudo</string>
+    <string name="tel">Telephone</string>
+    <string name="email">E-mail</string>
+    <string name="ImageDesc">Image caption</string>
+
+</resources>
