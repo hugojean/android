@@ -6,16 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="368dp"
-        android:layout_height="495dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <Button
+        android:id="@+id/bAnnonce"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="106dp"
+        android:text="@string/voir_annonce"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bDeposer"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="109dp"
+        android:text="@string/deposer_annonce"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bAnnonce" />
+
+    <Button
+        android:id="@+id/bListe"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="109dp"
+        android:text="@string/liste_annonces"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bDeposer" />
+
+    <Button
+        android:id="@+id/bPref"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="47dp"
+        android:layout_marginEnd="109dp"
+        android:text="@string/voir_pref"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bListe" />
+
 </android.support.constraint.ConstraintLayout>

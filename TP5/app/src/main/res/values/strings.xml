@@ -10,5 +10,11 @@
     <string name="tel">Telephone</string>
     <string name="email">E-mail</string>
     <string name="ImageDesc">Image caption</string>
+    <string name="Email">Email</string>
+    <string name="saveButton">Sauvegarder</string>
+    <string name="deposer_annonce">Deposer une annonce</string>
+    <string name="voir_annonce">Voir une annonce</string>
+    <string name="liste_annonces">Liste des annonces</string>
+    <string name="voir_pref">Mes préfèrences</string>
 
 </resources>

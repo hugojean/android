@@ -19,6 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AnnonceView" android:label="@string/app_name"></activity>
+        <activity android:name=".AnnonceListViewer" android:label="@string/app_name"></activity>
+        <activity android:name=".PrefView" android:label="@string/app_name"></activity>
     </application>
 
 </manifest>
