@@ -2,7 +2,9 @@ package com.example.a21602196.tp5;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,9 +55,19 @@ public class AnnonceView extends Activity {
         mail.setText(this.annonce.getMail());
         ville.setText(this.annonce.getVille());
 
+        mail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setData(Uri.parse("mailto:"+mail.getText()));
+                startActivity(emailIntent);
+            }
+        });
+
         Picasso.get()
                 .load(this.annonce.getImage().get((int)(Math.random()*this.annonce.getImageSize())).replace("[","").replace("\\","").replace("\"", ""))
                 .placeholder(R.drawable.placeholder)
                 .into(image);
+
     }
 }
