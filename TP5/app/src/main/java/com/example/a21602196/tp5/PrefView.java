@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,6 +15,7 @@ public class PrefView extends Activity {
     private TextInputEditText inputPseudo;
     private TextInputEditText inputEmail;
     private Button buttonSave;
+    private TextInputEditText inputTel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,10 +41,12 @@ public class PrefView extends Activity {
 
         this.inputEmail = findViewById(R.id.inputEmail);
         this.inputPseudo = findViewById(R.id.inputPseudo);
+        this.inputTel = findViewById(R.id.inputTel);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         Editor editor = pref.edit();
         editor.putString("Email", String.valueOf(inputEmail.getText()));
         editor.putString("Pseudo", String.valueOf(inputPseudo.getText()));
+        editor.putString("Tel", String.valueOf(inputTel.getText()));
         editor.apply();
     }
 }
