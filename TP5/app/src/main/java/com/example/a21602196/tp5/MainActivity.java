@@ -42,6 +42,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this,DeposerAnnonce.class);
             startActivity(intent);
         }
-
     }
 }

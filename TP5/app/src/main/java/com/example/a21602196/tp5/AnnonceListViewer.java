@@ -57,7 +57,7 @@ public class AnnonceListViewer extends AppCompatActivity implements MyAdapter.On
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-                e.printStackTrace();
+                    e.printStackTrace();
             }
 
             @Override

@@ -7,20 +7,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/editText5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="26dp"
-        android:ems="10"
-        android:hint="@string/codepost"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4"
-        android:importantForAutofill="no" />
-
-    <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/viewVille"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -29,27 +16,27 @@
         android:hint="@string/ville"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/viewDesc"
         android:importantForAutofill="no" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/viewDesc"
         android:layout_width="381dp"
         android:layout_height="106dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="27dp"
         android:layout_marginEnd="14dp"
         android:ems="10"
         android:hint="@string/descri"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:lines="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/viewPrix" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/viewTitre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -61,23 +48,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:importantForAutofill="no" />
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="182dp"
-        android:ems="10"
-        android:hint="@string/prix"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        android:importantForAutofill="no" />
-
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonDepo"
         android:layout_width="405dp"
         android:layout_height="52dp"
         android:layout_marginStart="3dp"
@@ -87,4 +59,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/viewCp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/codepost"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewVille" />
+
+    <EditText
+        android:id="@+id/viewPrix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="27dp"
+        android:ems="10"
+        android:hint="@string/prix"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/viewDesc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewTitre"
+        android:autofillHints="" />
+
 </android.support.constraint.ConstraintLayout>
