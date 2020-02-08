@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.support.v7.widget.Toolbar;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -12,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button pref;
     private Button deposerAnnonce;
     private Button listeAnnonce;
+    private Toolbar myToolbar;
 
 
     @Override
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listeAnnonce.setOnClickListener(this);
         pref = findViewById(R.id.bPref);
         pref.setOnClickListener(this);
+        myToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
     }
 
     @Override

@@ -2,9 +2,12 @@ package com.example.a21602196.tp5;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +45,7 @@ public class AnnonceView extends Activity {
         TextView mail = findViewById(R.id.email);
         TextView ville = findViewById(R.id.ville);
         ImageView image = findViewById(R.id.image);
+        FloatingActionButton addImage = findViewById(R.id.addPhoto);
 
 
         //On modifie les textview
@@ -55,19 +59,39 @@ public class AnnonceView extends Activity {
         mail.setText(this.annonce.getMail());
         ville.setText(this.annonce.getVille());
 
-        mail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent emailIntent = new Intent(Intent.ACTION_SEND);
-                emailIntent.setData(Uri.parse("mailto:"+mail.getText()));
-                startActivity(emailIntent);
-            }
+        mail.setOnClickListener(view -> {
+            Intent emailIntent = new Intent(Intent.ACTION_SEND);
+            emailIntent.setData(Uri.parse("mailto:"+mail.getText()));
+            startActivity(emailIntent);
         });
+
+        addImage.setOnClickListener(view -> {
+            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(cameraIntent, 100);
+        });
+
+
 
         Picasso.get()
                 .load(this.annonce.getImage().get((int)(Math.random()*this.annonce.getImageSize())).replace("[","").replace("\\","").replace("\"", ""))
                 .placeholder(R.drawable.placeholder)
                 .into(image);
+        
+        
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK)
+        {
+            ImageView imageView = findViewById(R.id.image);
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            imageView.setImageBitmap(photo);
+        }
+    }
+
+
+
 }
