@@ -2,20 +2,46 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/id"
+        android:id="@+id/titre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/titre" />
+
+    <TextView
+        android:id="@+id/prix"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
 
-        tools:text="Id">
+        tools:text="@string/prix">
 
     </TextView>
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="143dp"
+        android:contentDescription="@string/img"
+        android:visibility="visible"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[15]" />
+
+
+
+
+    <ImageButton
+        android:id="@+id/favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00ffffff"
+        android:clickable="false"
+        android:contentDescription="@string/favorite_non"
+        android:src="@drawable/ic_favorite_non_active" />
 
 
 </LinearLayout>

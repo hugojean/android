@@ -25,6 +25,7 @@ public class Annonce implements Parcelable {
     private int cp;
     private ArrayList<String> image;
     private String date;
+    private boolean isFavorite ;
 
 
     protected Annonce(Parcel in) {
@@ -39,6 +40,7 @@ public class Annonce implements Parcelable {
         cp = in.readInt();
         image = in.createStringArrayList();
         date = in.readString();
+        isFavorite = false;
     }
 
     public static final Creator<Annonce> CREATOR = new Creator<Annonce>() {
@@ -158,6 +160,7 @@ public class Annonce implements Parcelable {
         this.cp = resultat.getInt("cp");
         this.image = new ArrayList<String>(Arrays.asList(resultat.getString("images").split(",")));
         this.date = resultat.getString("date");
+        this.isFavorite = false;
     }
 
     public Annonce(String id, String titre, String description, int prix, String pseudo, String mail, String tel, String ville, int cp, ArrayList<String> image, String date) {
@@ -198,5 +201,13 @@ public class Annonce implements Parcelable {
         parcel.writeInt(cp);
         parcel.writeStringList(image);
         parcel.writeString(date);
+    }
+
+    public boolean getFavorite() {
+        return this.isFavorite;
+    }
+
+    public void setFavorite(boolean bool) {
+        this.isFavorite = bool;
     }
 }

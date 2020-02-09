@@ -7,28 +7,18 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/bAnnonce"
-        android:layout_width="194dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="109dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="106dp"
-        android:text="@string/voir_annonce"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/bDeposer"
         android:layout_width="194dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="109dp"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="119dp"
         android:layout_marginEnd="109dp"
+        android:layout_marginBottom="47dp"
         android:text="@string/deposer_annonce"
+        app:layout_constraintBottom_toTopOf="@+id/bListe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bAnnonce" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Button
         android:id="@+id/bListe"
@@ -37,36 +27,23 @@
         android:layout_marginStart="109dp"
         android:layout_marginTop="47dp"
         android:layout_marginEnd="109dp"
+        android:layout_marginBottom="413dp"
         android:text="@string/liste_annonces"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bDeposer" />
-
-    <Button
-        android:id="@+id/bPref"
-        android:layout_width="194dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="109dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="109dp"
-        android:text="@string/voir_pref"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bListe" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="23dp"
         android:background="#3D5AFE"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/bAnnonce"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

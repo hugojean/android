@@ -16,5 +16,9 @@
     <string name="voir_annonce">Voir une annonce</string>
     <string name="liste_annonces">Liste des annonces</string>
     <string name="voir_pref">Mes préfèrences</string>
+    <string name="favorite_non">Favorite=False</string>
+    <string name="img">img de l\'annonce</string>
+    <string name="save">Sauvegarder annonce</string>
+    <string name="favorite">Fav</string>
 
 </resources>
