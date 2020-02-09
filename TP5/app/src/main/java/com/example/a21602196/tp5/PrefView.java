@@ -22,8 +22,15 @@ public class PrefView extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.preference);
 
+        this.inputEmail = findViewById(R.id.inputEmail);
+        this.inputPseudo = findViewById(R.id.inputPseudo);
+        this.inputTel = findViewById(R.id.inputTel);
         this.buttonSave = findViewById(R.id.buttonSave);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
 
+        inputEmail.setText(pref.getString("Email","Email"));
+        inputPseudo.setText(pref.getString("Pseudo","Pseudo"));
+        inputTel.setText(pref.getString("Tel","Tel"));
         this.buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,9 +46,7 @@ public class PrefView extends Activity {
 
     private void savePref() {
 
-        this.inputEmail = findViewById(R.id.inputEmail);
-        this.inputPseudo = findViewById(R.id.inputPseudo);
-        this.inputTel = findViewById(R.id.inputTel);
+
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         Editor editor = pref.edit();
         editor.putString("Email", String.valueOf(inputEmail.getText()));

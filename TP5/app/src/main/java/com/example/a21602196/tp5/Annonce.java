@@ -2,9 +2,11 @@ package com.example.a21602196.tp5;
 
 
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,6 +56,26 @@ public class Annonce implements Parcelable {
             return new Annonce[size];
         }
     };
+
+    public Annonce(Cursor cursor) {
+        this.id = cursor.getString(0);
+        this.titre = cursor.getString(1);
+        this.description = cursor.getString(3);
+        this.prix = Integer.parseInt(cursor.getString(2));
+        this.pseudo = cursor.getString(4);
+        this.mail = cursor.getString(5);
+        this.tel = cursor.getString(6);
+        this.ville = cursor.getString(7);
+        this.cp = Integer.parseInt(cursor.getString(8));
+        this.date = cursor.getString(10);
+        this.isFavorite = false;
+        if (cursor.getString(9) != null) {
+            new ArrayList<String>(Arrays.asList(cursor.getString(9).split(",")));
+        }
+        else {
+            this.image = new ArrayList<String>();
+        }
+    }
 
     public String getId() {
         return id;

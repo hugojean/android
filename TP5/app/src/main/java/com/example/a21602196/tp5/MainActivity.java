@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button deposerAnnonce;
     private Button listeAnnonce;
     private Toolbar myToolbar;
+    private Button voirAnnonceSaved;
 
 
     @Override
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         deposerAnnonce.setOnClickListener(this);
         listeAnnonce = findViewById(R.id.bListe);
         listeAnnonce.setOnClickListener(this);
+        voirAnnonceSaved = findViewById(R.id.savedAnnonceButton);
+        voirAnnonceSaved.setOnClickListener(this);
         myToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
     }
@@ -38,6 +41,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (v== deposerAnnonce){
             Intent intent = new Intent(this,DeposerAnnonce.class);
+            startActivity(intent);
+        }
+        if (v== voirAnnonceSaved){
+            Intent intent = new Intent(this,AnnonceViewListSaved.class);
             startActivity(intent);
         }
     }

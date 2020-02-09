@@ -149,7 +149,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/D:/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_arrow_downward_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/D:/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_assessment_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -159,7 +159,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_save" />
+                            <entry key="outputName" value="ic_annonces_mine" />
                             <entry key="sourceFile" value="C:\Users\hugoj" />
                           </map>
                         </option>
