@@ -70,7 +70,7 @@ public class Annonce implements Parcelable {
         this.date = cursor.getString(10);
         this.isFavorite = false;
         if (cursor.getString(9) != null) {
-            new ArrayList<String>(Arrays.asList(cursor.getString(9).split(",")));
+            this.image = new ArrayList<String>(Arrays.asList(cursor.getString(9).split(",")));
         }
         else {
             this.image = new ArrayList<String>();
@@ -202,7 +202,7 @@ public class Annonce implements Parcelable {
     @Override
     public String toString(){
         Log.i("toString",""+this.id+" "+this.titre+" "+this.description+" "+this.prix+" "+this.pseudo+" "+this.mail+" "+this.tel+" "+this.ville+" "+this.cp+" "+this.date);
-        return null;
+        return "Oui";
     }
 
     @Override
