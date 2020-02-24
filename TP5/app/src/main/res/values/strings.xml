@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TP5</string>
+    <string name="app_name">Petite annonces</string>
     <string name="prix">Prix</string>
     <string name="titre">Titre</string>
     <string name="codepost">Code Postal</string>
@@ -22,5 +22,7 @@
     <string name="favorite">Fav</string>
     <string name="savedAnnonce">Annonces sauvegardées</string>
     <string name="annonces_mine">Mes annonces</string>
+    <string name="voir_mine">Mes annonces</string>
+    <string name="voir_saved">Annonces sauvegardées</string>
 
 </resources>

@@ -1,16 +1,14 @@
 package com.example.a21602196.tp5;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
 
@@ -27,27 +25,18 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-public class AnnonceListViewer extends AppCompatActivity implements MyAdapter.OnAnnonceListener, View.OnClickListener {
+public class MesAnnonceView extends AppCompatActivity implements MyAdapter.OnAnnonceListener, View.OnClickListener {
 
     private RecyclerView recycler;
-    private FloatingActionButton buttonAddAnnonce;
     private ArrayList<Annonce> listeAnnonce = new ArrayList<Annonce>();
-    private Toolbar myToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.annoncelistviewer);
+        setContentView(R.layout.mesannoncelistviewer);
 
-        recycler = (RecyclerView) findViewById(R.id.recyclerView);
+        recycler = (RecyclerView) findViewById(R.id.recyclerViewMesAnnonces);
         recycler.setLayoutManager(new LinearLayoutManager(this));
-
-        View view;
-        buttonAddAnnonce = (FloatingActionButton) findViewById(R.id.addAnnonce);
-        buttonAddAnnonce.setOnClickListener(this);
-
-        myToolbar = findViewById(R.id.toolbarMenuList);
-        setSupportActionBar(myToolbar);
 
 
 
@@ -65,15 +54,18 @@ public class AnnonceListViewer extends AppCompatActivity implements MyAdapter.On
 
 
     private void getJSON() throws IOException, JSONException {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        String pseudo = pref.getString("Pseudo", "Pseudo");
+
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://ensweb.users.info.unicaen.fr/android-api/?apikey=21602196&method=listAll")
+                .url("https://ensweb.users.info.unicaen.fr/android-api/?apikey=21602196&method=listByPseudo&pseudo="+pseudo)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(okhttp3.Call call, IOException e) {
-                    e.printStackTrace();
+                e.printStackTrace();
             }
 
             @Override
@@ -84,7 +76,7 @@ public class AnnonceListViewer extends AppCompatActivity implements MyAdapter.On
                     }
 
                     setAnnonceList(new JSONObject(responseBody.string()).getJSONArray("response"));
-                    AnnonceListViewer.this.runOnUiThread(() -> setView());
+                    MesAnnonceView.this.runOnUiThread(() -> setView());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -122,29 +114,5 @@ public class AnnonceListViewer extends AppCompatActivity implements MyAdapter.On
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu,menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.pref:
-                Intent intent0 = new Intent(this, PrefView.class);
-                startActivity(intent0);
-                break;
-            case R.id.AnnonceSaved:
-                Intent intent1 = new Intent(this, AnnonceViewListSaved.class);
-                startActivity(intent1);
-                break;
-            case R.id.MesAnnonces:
-                Intent intent2 = new Intent(this, MesAnnonceView.class);
-                startActivity(intent2);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

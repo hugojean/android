@@ -34,14 +34,5 @@
 
 
 
-    <ImageButton
-        android:id="@+id/favorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00ffffff"
-        android:clickable="false"
-        android:contentDescription="@string/favorite_non"
-        android:src="@drawable/ic_favorite_non_active" />
-
 
 </LinearLayout>

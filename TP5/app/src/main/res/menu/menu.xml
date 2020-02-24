@@ -7,4 +7,15 @@
         android:title="@string/voir_pref"
         app:showAsAction="ifRoom"/>
 
+    <item android:id="@+id/MesAnnonces"
+        android:icon="@drawable/ic_annonces_mine"
+        android:title="@string/voir_mine"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/AnnonceSaved"
+        android:icon="@drawable/ic_annonce_saved"
+        android:title="@string/voir_saved"
+        app:showAsAction="ifRoom"/>
+
+
 </menu>

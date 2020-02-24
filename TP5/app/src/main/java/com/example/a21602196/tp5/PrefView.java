@@ -46,7 +46,6 @@ public class PrefView extends Activity {
 
     private void savePref() {
 
-
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
         Editor editor = pref.edit();
         editor.putString("Email", String.valueOf(inputEmail.getText()));

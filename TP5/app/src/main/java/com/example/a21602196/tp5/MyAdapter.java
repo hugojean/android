@@ -31,7 +31,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             titleView = v.findViewById(R.id.titre);
             prixView = v.findViewById(R.id.prix);
             imgView = v.findViewById(R.id.image);
-            favorite = v.findViewById(R.id.favorite);
             this.onAnnonceListener = onAnnonceListener;
 
             itemView.setOnClickListener(this);
@@ -67,9 +66,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 .load(data.get(i).getImage().get((int)(Math.random()*data.get(i).getImageSize())).replace("[","").replace("\\","").replace("\"", ""))
                 .placeholder(R.drawable.placeholder)
                 .into(viewHolder.imgView);
-        if (data.get(i).getFavorite()){
-            viewHolder.favorite.setImageResource(R.drawable.ic_favorite_active);
-        }
     }
 
 

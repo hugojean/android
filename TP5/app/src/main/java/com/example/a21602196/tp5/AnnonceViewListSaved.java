@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.example.a21602196.tp5.DB.DBHelper;
 import com.example.a21602196.tp5.DB.FeedReaderContract;

@@ -6,15 +6,12 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,7 +20,6 @@ import android.widget.TextView;
 
 import com.example.a21602196.tp5.DB.DBHelper;
 import com.example.a21602196.tp5.DB.FeedReaderContract;
-import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -128,9 +124,6 @@ public class AnnonceView extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.favorite:{
-                this.annonce.setFavorite(true);
-            }
             case R.id.save:{
 
                 OkHttpClient client = new OkHttpClient();
@@ -173,6 +166,7 @@ public class AnnonceView extends AppCompatActivity {
                 values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DATE, this.annonce.getDate());
                 db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
                 // db.execSQL("DROP TABLE IF EXISTS "+ FeedReaderContract.FeedEntry.TABLE_NAME); DELETE les tables pour le debug
+                break;
             }
 
         }
