@@ -10,6 +10,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -22,17 +24,26 @@ import com.example.a21602196.tp5.DB.DBHelper;
 import com.example.a21602196.tp5.DB.FeedReaderContract;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Request.Builder;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
-public class AnnonceView extends AppCompatActivity {
+public class AnnoncePersoView extends AppCompatActivity {
     private Annonce annonce;
     private Toolbar myToolbar;
     private String imgPath;
@@ -83,7 +94,7 @@ public class AnnonceView extends AppCompatActivity {
         ville.setText(this.annonce.getVille());
 
         mail.setOnClickListener(view -> {
-            Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+            Intent emailIntent = new Intent(Intent.ACTION_SEND);
             emailIntent.setData(Uri.parse("mailto:"+mail.getText()));
             startActivity(emailIntent);
         });
@@ -117,84 +128,108 @@ public class AnnonceView extends AppCompatActivity {
 
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == 100 && resultCode == Activity.RESULT_OK)
+        {
+
+
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+            File file = null;
+            try {
+                file = getFileFromBitmap("image", photo);
+
+                OkHttpClient client = new OkHttpClient();
+                Request request;
+                RequestBody resquestBody = new MultipartBody.Builder().
+                        setType(MultipartBody.FORM).
+                        addFormDataPart("photo", "image", RequestBody.create(MediaType.parse("image/png"), file))
+                        .addFormDataPart("method","addImage")
+                        .addFormDataPart("apikey",String.valueOf(21602196))
+                        .addFormDataPart("id",this.annonce.getId())
+                        .build();
+
+                Request request1 = new Request.Builder().url("https://ensweb.users.info.unicaen.fr/android-api/").post(resquestBody).build();
+
+                client.newCall(request1).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                            e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        try {
+                            if (response.isSuccessful()) {
+                                try (ResponseBody responseBody = response.body()){
+                                    afficheAnnonceSucess(new JSONObject(responseBody.string()).getJSONObject("response"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+            catch (IOException e) {
+            e.printStackTrace();
+        }
+        }
+    }
+
+    private void afficheAnnonceSucess(JSONObject response) {
+        Intent intent = new Intent(this, AnnonceView.class);
+        try {
+            intent.putExtra("annonce", (Parcelable) new Annonce(response));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        startActivity(intent);
+    }
+
+    private File getFileFromBitmap(String image, Bitmap photo) throws IOException {
+        File f = new File(getDataDir()+"/"+image+".png");
+        FileOutputStream outStream = new FileOutputStream(f);
+        photo.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+        outStream.flush();
+        outStream.close();
+        return f;
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_annonce,menu);
+        inflater.inflate(R.menu.menu_mes_annonce,menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.save:{
-
-                OkHttpClient client = new OkHttpClient();
-                int num = 0;
-                for (String imgPath : this.annonce.getImage()){
-                    Request request = new Request.Builder().url(imgPath.replace("[","").replace("\\","").replace("\"", "")).build();
-                    int finalNum = num;
-                    client.newCall(request).enqueue(new Callback() {
-                        public void onFailure(Call call, IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        public void onResponse(Call call, Response response) throws IOException {
-                            if (!response.isSuccessful()) {
-                                throw new IOException("Failed to download file: " + response);
-                            }
-                            Bitmap bitmapImage = BitmapFactory.decodeStream(response.body().byteStream());
-                            saveImage(bitmapImage, finalNum);
-                        }
-                    });
-                    num +=1;
-                }
-
-
-
-
-                DBHelper dbHelper = new DBHelper(this);
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-                ContentValues values = new ContentValues();
-                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TITLE, this.annonce.getTitre());
-                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_PRIX, String.valueOf(this.annonce.getPrix()));
-                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DESC, this.annonce.getDescription());
-                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_PSEUDO, this.annonce.getPseudo());
-                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_MAIL, this.annonce.getMail());
-                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_TEL, this.annonce.getTel());
-                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_VILLE, this.annonce.getVille());
-                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_CP, String.valueOf(this.annonce.getCp()));
-                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_IMAGE, this.imgPath);
-                values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_DATE, this.annonce.getDate());
-                db.insert(FeedReaderContract.FeedEntry.TABLE_NAME, null, values);
-                // db.execSQL("DROP TABLE IF EXISTS "+ FeedReaderContract.FeedEntry.TABLE_NAME); DELETE les tables pour le debug
+        switch (item.getItemId()) {
+            case R.id.addPhoto:
+                Intent cameraI = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent piclFromGallery = new Intent();
+                piclFromGallery.setType("image/*");
+                piclFromGallery.setAction(Intent.ACTION_GET_CONTENT);
+                Intent chooser = Intent.createChooser(piclFromGallery, "Some text here");
+                chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] { cameraI });
+                startActivityForResult(chooser, 100);
+                finish();
                 break;
-            }
-
+            case R.id.modify:
+                Intent intent = new Intent(this, ModifyAnnonce.class);
+                intent.putExtra("annonce",(Parcelable) this.annonce );
+                startActivity(intent);
+                finish();
+                break;
         }
-        return super.onOptionsItemSelected(item);
-    }
-    
-    private void saveImage(Bitmap image,int num){
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        File mypath=new File(directory,this.annonce.getId()+"_"+num);
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(mypath);
-            image.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                return super.onOptionsItemSelected(item);
         }
-        this.imgPath += mypath.getAbsolutePath()+" ";
-    }
 
 
 

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 
 import org.json.JSONArray;
@@ -29,6 +30,7 @@ public class MesAnnonceView extends AppCompatActivity implements MyAdapter.OnAnn
 
     private RecyclerView recycler;
     private ArrayList<Annonce> listeAnnonce = new ArrayList<Annonce>();
+    private TextView siPasDannonce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class MesAnnonceView extends AppCompatActivity implements MyAdapter.OnAnn
         recycler = (RecyclerView) findViewById(R.id.recyclerViewMesAnnonces);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
-
+        this.siPasDannonce = findViewById(R.id.textViewSiPasAnnonce);
 
         try {
             getJSON();
@@ -47,6 +49,7 @@ public class MesAnnonceView extends AppCompatActivity implements MyAdapter.OnAnn
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
 
 
     }
@@ -86,6 +89,10 @@ public class MesAnnonceView extends AppCompatActivity implements MyAdapter.OnAnn
     }
 
     private void setView() {
+        if (this.listeAnnonce.size()==0){
+
+            this.siPasDannonce.setVisibility(View.VISIBLE);
+        }
         recycler.setAdapter(new MyAdapter(listeAnnonce,this));
     }
 
@@ -102,9 +109,10 @@ public class MesAnnonceView extends AppCompatActivity implements MyAdapter.OnAnn
     @Override
     public void onAnnonceClick(int position) {
         Annonce annonceCicker = this.listeAnnonce.get(position);
-        Intent intent = new Intent(this, AnnonceView.class);
+        Intent intent = new Intent(this, AnnoncePersoView.class);
         intent.putExtra("annonce", (Parcelable) annonceCicker);
         startActivity(intent);
+        finish();
     }
 
     @Override

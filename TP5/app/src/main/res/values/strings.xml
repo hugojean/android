@@ -24,5 +24,11 @@
     <string name="annonces_mine">Mes annonces</string>
     <string name="voir_mine">Mes annonces</string>
     <string name="voir_saved">Annonces sauvegardées</string>
+    <string name="modify">Modifier annonce</string>
+    <string name="addPhoto">Ajouter une photo</string>
+    <string name="delete">Supprimer l\'annonce</string>
+    <string name="deletefromDB">Supprime de la DB</string>
+    <string name="PasAnnonce">Pas d\'annonces sauvegardées</string>
+    <string name="pasdePost">Pas d\'annonces postées</string>
 
 </resources>
